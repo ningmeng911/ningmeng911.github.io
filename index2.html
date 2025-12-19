@@ -1,1 +1,153 @@
-
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>酸萝卜别吃</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #0a0a0a;
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+        
+        .text-container {
+            position: relative;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .main-text {
+            color: #4CAF50;
+            font-size: 5rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.5),
+                         0 0 20px rgba(76, 175, 80, 0.3),
+                         0 0 30px rgba(76, 175, 80, 0.2);
+            letter-spacing: 2px;
+            line-height: 1.2;
+            animation: pulse 3s infinite alternate;
+        }
+        
+        /* 微妙的动画效果 */
+        @keyframes pulse {
+            0% {
+                opacity: 0.9;
+                text-shadow: 0 0 10px rgba(76, 175, 80, 0.5),
+                             0 0 20px rgba(76, 175, 80, 0.3),
+                             0 0 30px rgba(76, 175, 80, 0.2);
+            }
+            100% {
+                opacity: 1;
+                text-shadow: 0 0 15px rgba(76, 175, 80, 0.7),
+                             0 0 30px rgba(76, 175, 80, 0.5),
+                             0 0 45px rgba(76, 175, 80, 0.3);
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .main-text {
+                font-size: 3.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-text {
+                font-size: 2.5rem;
+            }
+        }
+        
+        /* 背景装饰 */
+        .bg-decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .bg-decoration::before,
+        .bg-decoration::after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(76, 175, 80, 0.05);
+            filter: blur(40px);
+        }
+        
+        .bg-decoration::before {
+            top: 10%;
+            left: 10%;
+            animation: float 25s infinite linear;
+        }
+        
+        .bg-decoration::after {
+            bottom: 15%;
+            right: 10%;
+            animation: float 30s infinite linear reverse;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            100% {
+                transform: translate(100px, 100px) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="text-container">
+        <div class="main-text">酸萝卜别吃</div>
+    </div>
+    
+    <div class="bg-decoration"></div>
+    
+    <script>
+        // 添加一些微交互
+        document.addEventListener('DOMContentLoaded', function() {
+            const text = document.querySelector('.main-text');
+            
+            // 鼠标悬停效果
+            text.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            text.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+            
+            // 点击效果
+            text.addEventListener('click', function() {
+                this.style.color = '#8BC34A'; // 点击时稍微改变绿色
+                setTimeout(() => {
+                    this.style.color = '#4CAF50';
+                }, 300);
+            });
+            
+            // 随机改变动画速度
+            setInterval(() => {
+                const randomSpeed = (Math.random() * 2 + 2).toFixed(1);
+                text.style.animationDuration = `${randomSpeed}s`;
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
